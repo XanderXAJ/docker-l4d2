@@ -9,10 +9,9 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Install L4D2 via steamcmd
-# TODO: don't silence all curls to aid debugging
 RUN mkdir -p /opt/steamcmd \
   && cd /opt/steamcmd \
-  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar xzv \
+  && curl -L "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar xzv \
   && ./steamcmd.sh \
     +login anonymous \
     +force_install_dir /opt/l4d2 \
@@ -30,9 +29,9 @@ WORKDIR /opt/l4d2
 # Install Metamod and SourceMod, mods and plugins
 RUN cd /opt/l4d2/left4dead2 \
   # Metamod
-  && curl -sL "http://www.gsptalk.com/mirror/sourcemod/mmsource-1.10.6-linux.tar.gz" | tar xzv \
+  && curl -L "http://www.gsptalk.com/mirror/sourcemod/mmsource-1.10.6-linux.tar.gz" | tar xzv \
   # SourceMod
-  && curl -sL "https://sm.alliedmods.net/smdrop/1.8/sourcemod-1.8.0-git5974-linux.tar.gz" | tar xzv \
+  && curl -L "https://sm.alliedmods.net/smdrop/1.8/sourcemod-1.8.0-git5974-linux.tar.gz" | tar xzv \
   # Extensions
   && cd /opt/l4d2/left4dead2/addons/sourcemod \
   # Left 4 Downtown 0.4.7.0
